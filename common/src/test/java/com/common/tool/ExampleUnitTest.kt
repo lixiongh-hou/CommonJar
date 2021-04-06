@@ -1,4 +1,4 @@
-package com.common.common
+package com.common.tool
 
 import org.junit.Test
 
