@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.common.tool.bridge.EventObserver
+import com.common.tool.data.bridge.EventObserver
 import com.common.tool.util.ToastUtil.toast
 import java.lang.reflect.ParameterizedType
 
@@ -24,7 +24,9 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
         initBindingWithModel()
-        model.toastLiveData.observe(this, EventObserver<String> { t -> toast(t) })
+        model.toastLiveData.observe(this) {
+            toast(it)
+        }
         initView(savedInstanceState)
         initData()
     }

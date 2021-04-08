@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.common.tool.bridge.EventObserver
+import com.common.tool.data.bridge.EventObserver
 import com.common.tool.util.ToastUtil.toast
 import java.lang.reflect.ParameterizedType
 
@@ -57,7 +57,9 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : BaseViewModel> : Fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model.toastLiveData.observe(viewLifecycleOwner, EventObserver<String> { t -> toast(t) })
+        model.toastLiveData.observe(this) {
+            toast(it)
+        }
         initView(savedInstanceState)
         initData()
     }

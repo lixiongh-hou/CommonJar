@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         model.success.observe(this, Observer {
             Log.e("测试", "访问成功")
-            binding.text.text = Gson().toJson(it)
+            binding.content = Gson().toJson(it)
         })
     }
 
