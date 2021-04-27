@@ -1,6 +1,5 @@
 package com.common.jar
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.common.tool.base.BaseViewModel

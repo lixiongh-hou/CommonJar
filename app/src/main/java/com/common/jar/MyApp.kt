@@ -7,5 +7,6 @@ import com.common.tool.base.BaseApp
  *
  * @features ***
  */
-class MyApp: BaseApp() {
+class MyApp : BaseApp() {
+
 }

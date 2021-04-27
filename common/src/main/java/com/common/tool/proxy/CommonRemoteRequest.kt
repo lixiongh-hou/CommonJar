@@ -16,6 +16,14 @@ import com.common.tool.util.NetworkUtil
  */
 internal class CommonRemoteRequest : ICommonRequest {
 
+    private inline fun checkNetwork(error: (ApiError) -> Unit, reject: () -> Unit) {
+        if (!NetworkUtil.isNetworkConnected()) {
+            error.invoke(ApiError(-2, "网络不可用"))
+            reject.invoke()
+        }
+    }
+
+
     private inline fun checkNetwork(error: (ApiError) -> Unit) {
         if (!NetworkUtil.isNetworkConnected()) {
             error.invoke(ApiError(-2, "网络不可用"))
@@ -23,6 +31,7 @@ internal class CommonRemoteRequest : ICommonRequest {
     }
 
     override suspend fun banner(success: (MutableList<Banner>) -> Unit, error: (ApiError) -> Unit) {
+        checkNetwork(error) { return }
         runInDispatcherIO {
             try {
                 HttpClient.getCommonService().banner()
@@ -34,7 +43,7 @@ internal class CommonRemoteRequest : ICommonRequest {
                 if (e is ServerException) {
                     error.invoke(ApiError(e.code, e.message ?: ""))
                 } else {
-                    e.convertNetworkError ({
+                    e.convertNetworkError({
                         error.invoke(it)
                     }, {
                         checkNetwork(error)

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.common.jar.reminder.AddReminderViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.common.jar.reminder.AddReminderFragment" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_layout" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <cn.carbswang.android.numberpickerview.library.NumberPickerView
+                android:id="@+id/pickerHour"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                app:npv_DividerColor="@color/transparent"
+                app:npv_HintText="时"
+                app:npv_RespondChangeOnDetached="false"
+                app:npv_ShownCount="5"
+                app:npv_TextColorHint="@color/black"
+                app:npv_TextColorNormal="#cccccc"
+                app:npv_TextColorSelected="@color/black"
+                app:npv_TextSizeHint="13sp"
+                app:npv_TextSizeNormal="30sp"
+                app:npv_TextSizeSelected="50sp"
+                app:npv_WrapSelectorWheel="true" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="60dp"
+                android:background="#ededed" />
+
+            <cn.carbswang.android.numberpickerview.library.NumberPickerView
+                android:id="@+id/pickerMinute"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                app:npv_DividerColor="@color/transparent"
+                app:npv_HintText="分"
+                app:npv_RespondChangeOnDetached="false"
+                app:npv_ShownCount="5"
+                app:npv_TextColorHint="@color/black"
+                app:npv_TextColorNormal="#cccccc"
+                app:npv_TextColorSelected="@color/black"
+                app:npv_TextSizeHint="13sp"
+                app:npv_TextSizeNormal="30sp"
+                app:npv_TextSizeSelected="50sp"
+                app:npv_WrapSelectorWheel="true" />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="其他"
+                    android:textColor="@color/font66"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="15dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="重复"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:text="@={model.rule}"
+                        android:textColor="@color/font66"
+                        android:textSize="14sp"
+                        app:drawableEndCompat="@drawable/ic_enter"
+                        app:drawableTint="@color/font66" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="15dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="备注"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:text="@={model.remarks}"
+                        android:textColor="@color/font66"
+                        android:textSize="14sp"
+                        app:drawableEndCompat="@drawable/ic_enter"
+                        app:drawableTint="@color/font66" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</layout>

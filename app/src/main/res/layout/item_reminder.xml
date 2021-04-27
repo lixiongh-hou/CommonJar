@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.common.tool.notify.Reminder" />
+
+        <variable
+            name="remainder"
+            type="String" />
+
+        <variable
+            name="selectedDel"
+            type="Boolean" />
+
+        <variable
+            name="selected"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <com.ruffian.library.widget.RLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        app:background_normal="@color/white"
+        app:background_pressed="#ededed">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@{data.time}"
+                    android:textColor="@{data.turnNn?@color/font33:@color/font99}"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="bottom"
+                    android:maxLines="1"
+                    android:text="@{data.remarks}"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@{data.rule}"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="3dp"
+                    android:background="#999999" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@{remainder}"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
+
+            <Switch
+                android:id="@+id/turnNnView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:checked="@{data.turnNn}"
+                android:thumb="@drawable/switch_ios_thumb"
+                android:track="@drawable/switch_ios_track_selector"
+                android:visibility="@{selectedDel?View.GONE:View.VISIBLE}"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@{selected?@drawable/ic_selected:@drawable/ic_un_selected}"
+                android:visibility="@{selectedDel?View.VISIBLE:View.GONE}" />
+        </RelativeLayout>
+
+
+    </com.ruffian.library.widget.RLinearLayout>
+</layout>

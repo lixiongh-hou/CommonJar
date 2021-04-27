@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.common.tool.notify.Reminder" />
+
+        <variable
+            name="remainder"
+            type="String" />
+
+
+    </data>
+
+    <com.ruffian.library.widget.RLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:background_normal="@color/white"
+        app:corner_radius="15dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="15dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@{data.time}"
+                        android:textColor="@{data.turnNn?@color/font33:@color/font99}"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="bottom"
+                        android:maxLines="1"
+                        android:text="@{data.remarks}"
+                        android:textColor="#999999"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@{data.rule}"
+                        android:textColor="#999999"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="3dp"
+                        android:background="#999999" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@{remainder}"
+                        android:textColor="#999999"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/turnNnView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:checked="@{data.turnNn}"
+                android:thumb="@drawable/switch_ios_thumb"
+                android:track="@drawable/switch_ios_track_selector"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <cn.carbswang.android.numberpickerview.library.NumberPickerView
+                android:id="@+id/pickerHour"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                app:npv_DividerColor="@color/transparent"
+                app:npv_HintText="时"
+                app:npv_RespondChangeOnDetached="false"
+                app:npv_TextColorHint="@color/black"
+                app:npv_TextColorNormal="#cccccc"
+                app:npv_TextColorSelected="@color/black"
+                app:npv_TextSizeHint="13sp"
+                app:npv_TextSizeNormal="30sp"
+                app:npv_TextSizeSelected="50sp"
+                app:npv_WrapSelectorWheel="true" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="60dp"
+                android:background="#ededed" />
+
+            <cn.carbswang.android.numberpickerview.library.NumberPickerView
+                android:id="@+id/pickerMinute"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                app:npv_DividerColor="@color/transparent"
+                app:npv_HintText="分"
+                app:npv_RespondChangeOnDetached="false"
+                app:npv_TextColorHint="@color/black"
+                app:npv_TextColorNormal="#cccccc"
+                app:npv_TextColorSelected="@color/black"
+                app:npv_TextSizeHint="13sp"
+                app:npv_TextSizeNormal="30sp"
+                app:npv_TextSizeSelected="50sp"
+                app:npv_WrapSelectorWheel="true" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:paddingHorizontal="15dp">
+
+            <com.ruffian.library.widget.RTextView
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="更多设置"
+                android:textSize="18sp"
+                app:background_normal="#EDEDED"
+                app:corner_radius="50dp"
+                app:text_color_normal="@color/black" />
+
+            <com.ruffian.library.widget.RTextView
+                android:id="@+id/complete"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="完成"
+                android:textSize="18sp"
+                app:background_normal="#EDEDED"
+                app:corner_radius="50dp"
+                app:text_color_normal="@color/black" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.ruffian.library.widget.RLinearLayout>
+</layout>

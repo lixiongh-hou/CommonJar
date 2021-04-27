@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="data"
+            type="com.common.jar.paging.Student" />
+    </data>
+
+    <com.ruffian.library.widget.RLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        app:background_normal="@color/purple_700"
+        app:corner_radius="3dp"
+        app:shadow_color="@color/purple_200"
+        app:shadow_radius="5dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.name}"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"/>
+
+    </com.ruffian.library.widget.RLinearLayout>
+</layout>

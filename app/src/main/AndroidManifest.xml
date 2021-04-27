@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.common.jar">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -17,6 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".work.WorkActivity"/>
+        <activity android:name=".paging.PagingActivity"/>
+        <activity android:name=".reminder.ReminderActivity"
+            android:theme="@style/Theme.NoTitle"/>
     </application>
 
 </manifest>

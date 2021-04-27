@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_work"
+    app:startDestination="@id/selectImageFragment">
+
+    <fixFragment
+        android:id="@+id/selectImageFragment"
+        android:name="com.common.jar.work.SelectImageFragment"
+        tools:layout="@layout/fragment_select">
+
+
+        <action
+            android:id="@+id/actionBlurFragment"
+            app:destination="@id/blurFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit"/>
+    </fixFragment>
+
+    <fixFragment
+        android:id="@+id/blurFragment"
+        android:name="com.common.jar.work.BlurFragment"
+        tools:layout="@layout/fragment_blur">
+
+        <argument
+            android:name="uri"
+            app:argType="string" />
+    </fixFragment>
+</navigation>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.common.tool.base.rv.BaseAdapter" />
+
+        <variable
+            name="fragment"
+            type="com.common.jar.reminder.ReminderFragment" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_layout" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.common.jar.work.NestedScrollViewCustomer
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fadingEdgeLength="300dp"
+                android:requiresFadingEdge="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        rvLAdapter="@{adapter}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:overScrollMode="never" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp" />
+                </LinearLayout>
+            </com.common.jar.work.NestedScrollViewCustomer>
+
+            <com.ruffian.library.widget.RFrameLayout
+                android:id="@+id/delReminder"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="40dp"
+                android:onClick="@{() -> fragment.deleteReminder()}"
+                app:background_normal="@color/white"
+                app:background_pressed="#ededed"
+                app:border_color_normal="#333333"
+                app:border_dash_width="1dp"
+                app:corner_radius="100dp"
+                app:shadow_color="#dddddd"
+                app:shadow_radius="20dp"
+                android:translationY="120dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_delete" />
+            </com.ruffian.library.widget.RFrameLayout>
+
+
+            <com.ruffian.library.widget.RFrameLayout
+                android:id="@+id/addReminder"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="40dp"
+                android:onClick="@{() -> fragment.navigateAddReminderFragment()}"
+                app:background_normal="@color/white"
+                app:background_pressed="#ededed"
+                app:border_color_normal="#333333"
+                app:border_dash_width="1dp"
+                app:corner_radius="100dp"
+                app:shadow_color="#dddddd"
+                app:shadow_radius="20dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/add_reminder" />
+            </com.ruffian.library.widget.RFrameLayout>
+        </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

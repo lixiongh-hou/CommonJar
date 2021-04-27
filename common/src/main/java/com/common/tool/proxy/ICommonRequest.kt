@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 /**
  * @author 李雄厚
  *
- * @features ***
+ * @features 访问控制器
  */
 interface ICommonRequest {
     companion object{

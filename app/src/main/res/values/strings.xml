@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">CommonJar</string>
+    <string name="select_pic">选择图片</string>
+
+    <!-- Messages -->
+    <string name="set_permissions_in_settings">转到设置->应用程序和通知-> CommonJar->应用程序权限，
+        并授予对存储的访问权限。</string>
+    <string name="blur_title">选择模糊量</string>
+    <string name="blur_lv_1">有点模糊</string>
+    <string name="blur_lv_2">更模糊</string>
+    <string name="blur_lv_3">最模糊</string>
+    <string name="go">开始</string>
+    <string name="see_file">查看文件</string>
+
+    <!-- Content descriptions -->
+    <string name="description_image">The image to blur and save.</string>
+    <string name="cancel_work">清除Work</string>
+    <string name="detection_reminder">检测提醒</string>
+    <string name="cancel">取消</string>
+
+    <string name="turn_on_reminder">开启通知</string>
+    <string name="close_reminder">关闭通知</string>
+
+
 </resources>

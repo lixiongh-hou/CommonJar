@@ -1,13 +1,23 @@
 package com.common.tool.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.common.tool.data.bridge.EventObserver
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.common.tool.R
+import com.common.tool.dialog.ReminderDialog
+import com.common.tool.notify.ReminderModel
 import com.common.tool.util.ToastUtil.toast
 import java.lang.reflect.ParameterizedType
 
@@ -19,6 +29,18 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<Binding : ViewDataBinding, VM : BaseViewModel> : Fragment() {
     lateinit var binding: Binding
     lateinit var model: VM
+    private lateinit var cl: RelativeLayout
+    var activity: AppCompatActivity? = null
+    var initData = false
+
+    lateinit var reminderModel: ReminderModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        reminderModel =
+            (activity?.applicationContext as BaseApp).appViewModelProvider(requireActivity())
+                .get(ReminderModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +48,9 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : BaseViewModel> : Fra
         savedInstanceState: Bundle?
     ): View? {
         initBindingWithModel(inflater)
+        reminderModel.reminder.observe(this) {
+            ReminderDialog.show(childFragmentManager, it)
+        }
         return binding.root
     }
 
@@ -61,12 +86,69 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : BaseViewModel> : Fra
             toast(it)
         }
         initView(savedInstanceState)
-        initData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!initData) {
+            initData()
+            initData = true
+        }
     }
 
     abstract fun initView(savedInstanceState: Bundle?)
     abstract fun initData()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = context as AppCompatActivity
+        holderBackPressed()
+    }
+
+    private var callback: OnBackPressedCallback? = null
+    private fun callback(): OnBackPressedCallback {
+        if (callback == null) {
+            callback = object : OnBackPressedCallback(true /* enabled by default */) {
+                @Override
+                override fun handleOnBackPressed() {
+                    onBackClickListener()
+                }
+            }
+        }
+        return callback!!
+    }
+
+    open fun holderBackPressed() {
+        activity?.onBackPressedDispatcher?.addCallback(this, callback())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        callback = null
+    }
+
+    protected fun findNavController(): NavController? {
+        return Navigation.findNavController(binding.root)
+    }
+
+    /**
+     * 如果不使用navigate库重写该方法处理返回事件
+     */
+    protected open fun onBackClickListener() {
+        findNavController()?.navigateUp()
+    }
+
+    protected fun getTitleBar(): RelativeLayout {
+        return cl
+    }
+    fun initTitleBar(title: String) {
+        cl = binding.root.findViewById(R.id.baseTitleLay)
+        val tvTitle = cl.findViewById(R.id.baseTitleText) as AppCompatTextView
+        tvTitle.text = title
+        (cl.findViewById(R.id.baseTitleClose) as (AppCompatImageView)).setOnClickListener {
+            onBackClickListener()
+        }
+    }
 
     fun toast(message: String?) {
         message ?: return

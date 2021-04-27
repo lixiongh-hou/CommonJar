@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="commonStyleDialog" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item><!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item> <!-- 无标题 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+    <!--弹出框周围模糊-->
+    <style name="style_dialog_fuzzy" parent="commonStyleDialog">
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <!--弹出框周围不模糊-->
+    <style name="style_dialog_no_fuzzy" parent="commonStyleDialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--中间弹窗框动画-->
+    <style name="DialogCentreAnim">
+        <item name="android:windowEnterAnimation">@anim/dialog_centre_anim_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_centre_anim_exit</item>
+    </style>
+
+</resources>

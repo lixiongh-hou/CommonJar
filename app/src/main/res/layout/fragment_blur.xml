@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="uri"
+            type="android.net.Uri" />
+
+        <variable
+            name="blurUri"
+            type="android.net.Uri" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <ImageView
+            imageUri="@{uri}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/description_image"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/blurImage"
+            imageUri="@{blurUri}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/description_image"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blur_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <RadioGroup
+            android:id="@+id/radioBlurGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radioBlurLv1"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioBlurLv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/blur_lv_1" />
+
+            <RadioButton
+                android:id="@+id/radioBlurLv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/blur_lv_2" />
+
+            <RadioButton
+                android:id="@+id/radioBlurLv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/blur_lv_3" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:progress="0"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel_work"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/goButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/go" />
+
+            <Button
+                android:id="@+id/seeFileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/see_file"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.common.tool.data.bridge.EventObserver
+import com.common.tool.dialog.ReminderDialog
+import com.common.tool.notify.ReminderModel
 import com.common.tool.util.ToastUtil.toast
 import java.lang.reflect.ParameterizedType
 
@@ -19,17 +20,27 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
     lateinit var binding: Binding
     lateinit var model: VM
     abstract val layoutId: Int
+    var index = 0
+
+    lateinit var reminderModel: ReminderModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
         initBindingWithModel()
+        reminderModel = (applicationContext as BaseApp).appViewModelProvider(this).get(ReminderModel::class.java)
+        reminderModel.reminder.observe(this){
+            ReminderDialog.show(supportFragmentManager, it)
+        }
         model.toastLiveData.observe(this) {
             toast(it)
         }
         initView(savedInstanceState)
         initData()
+
     }
+
 
     abstract fun initView(savedInstanceState: Bundle?)
     abstract fun initData()
@@ -59,5 +70,4 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
         }
         message.toast()
     }
-
 }

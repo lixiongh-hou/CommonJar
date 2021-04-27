@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 30
@@ -9,12 +10,13 @@ android {
 
     defaultConfig {
         applicationId "com.common.jar"
-        minSdkVersion 19
+        minSdkVersion 25
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -34,9 +36,21 @@ android {
     dataBinding {
         enabled = true
     }
+
+    compileOptions.encoding = "GBK"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common')
+
+    def paging_version = "2.1.2"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
+    //https://github.com/Carbs0126/NumberPickerView/blob/master/README_ch.md
+    implementation 'cn.carbswang.android:NumberPickerView:1.2.0'
 }
