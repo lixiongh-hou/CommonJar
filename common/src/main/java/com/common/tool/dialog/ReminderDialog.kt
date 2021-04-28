@@ -7,7 +7,9 @@ import com.common.tool.R
 import com.common.tool.base.BaseFragmentDialog
 import com.common.tool.databinding.DialogReminderBinding
 import com.common.tool.notify.Reminder
+import com.common.tool.notify.ReminderNotifyManager
 import com.common.tool.sp.SharedPreferenceUtils
+import com.common.tool.util.DateTimeUtil
 import com.common.tool.util.SpanBuilder
 
 /**
@@ -38,6 +40,7 @@ class ReminderDialog : BaseFragmentDialog<DialogReminderBinding>() {
                 }
                 SharedPreferenceUtils.putListData("reminder", reminders)
             }
+
             if (dialog.isAdded || dialog.isResumed || dialog.isVisible) {
                 dialog.binding.tvContent.append(string)
             } else {
@@ -51,8 +54,35 @@ class ReminderDialog : BaseFragmentDialog<DialogReminderBinding>() {
                 }
                 dialog.show(fragmentManager, "reminder")
             }
+            if (reminder.rule != "只响一次"){
+                reminder.timeLong = setTimeLong(reminder.time)
+                ReminderNotifyManager.setNotify(reminder)
+                reminder.timeLong = -1L
+
+            }
+        }
+
+        private  fun setTimeLong(hhAndMm: String): Long {
+            val time = "${DateTimeUtil.currentTime(DateTimeUtil.YYYY_MM)}-${(DateTimeUtil.currentTime(DateTimeUtil.DD).toInt() + 1)} ${hhAndMm}:00"
+            return if (DateTimeUtil.getTimeMillis(
+                    time,
+                    DateTimeUtil.YYYY_MM_DD_HH_MM_SS
+                ) > System.currentTimeMillis()
+            ) {
+                DateTimeUtil.getTimeMillis(
+                    time,
+                    DateTimeUtil.YYYY_MM_DD_HH_MM_SS
+                ) - System.currentTimeMillis()
+            } else {
+                val temporaryLong = System.currentTimeMillis() - DateTimeUtil.getTimeMillis(
+                    time,
+                    DateTimeUtil.YYYY_MM_DD_HH_MM_SS
+                )
+                (24 * 60 * 60 * 1000) - temporaryLong
+            }
         }
     }
+
 
     override fun convertView(binding: DialogReminderBinding) {
         val string = arguments?.getCharSequence("content") ?: ""

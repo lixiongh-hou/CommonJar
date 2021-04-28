@@ -16,6 +16,8 @@ object DateTimeUtil {
     const val YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm"
     const val YYYY_MM_DD = "yyyy-MM-dd"
     const val HH_MM = "HH:mm"
+    const val YYYY_MM = "yyyy-MM"
+    const val DD = "dd"
     const val SS = "ss"
     const val MM_DD_HH_MM = "MM-dd HH:mm"
     const val HH_MM_SS = "HH:mm:ss"

@@ -22,5 +22,24 @@
     <fixFragment
         android:id="@+id/addReminderFragment"
         android:name="com.common.jar.reminder.AddReminderFragment"
-        tools:layout="@layout/fragment_add_reminder" />
+        tools:layout="@layout/fragment_add_reminder">
+
+
+        <action
+            android:id="@+id/actionRemarkFragment"
+            app:destination="@id/remarkFragment"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fixFragment>
+
+    <fixFragment
+        android:id="@+id/remarkFragment"
+        android:name="com.common.jar.reminder.RemarkFragment"
+        tools:layout="@layout/fragment_remark">
+        <argument
+            android:name="remark"
+            app:argType="string" />
+    </fixFragment>
 </navigation>

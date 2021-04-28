@@ -20,7 +20,7 @@ data class Reminder(
     /**
      * 提示
      */
-    val remarks: String = "",
+    var remarks: String = "",
 
     var turnNn: Boolean = false
 

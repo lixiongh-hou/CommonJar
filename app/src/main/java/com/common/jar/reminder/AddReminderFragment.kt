@@ -7,9 +7,13 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.common.jar.R
 import com.common.jar.databinding.FragmentAddReminderBinding
+import com.common.jar.dialog.RuleDialog
 import com.common.tool.base.BaseFragment
+import com.common.tool.live_data_bus.LiveDataBus
+import com.common.tool.notify.Reminder
 import com.common.tool.util.DateTimeUtil
 import com.common.tool.util.DateTimeUtil.formatTime
 import com.common.tool.util.NonDoubleClick.clickWithTrigger
@@ -26,7 +30,9 @@ class AddReminderFragment : BaseFragment<FragmentAddReminderBinding, AddReminder
     private var minuteValue = 0
     private var minuteString = ""
     private lateinit var titleHint: AppCompatTextView
-    companion object{
+    private var reminder: Reminder? = null
+
+    companion object {
         val pickerHourList by lazy {
             val list = mutableListOf<String>()
             for (i in 0 until 24) {
@@ -56,6 +62,12 @@ class AddReminderFragment : BaseFragment<FragmentAddReminderBinding, AddReminder
     override fun initView(savedInstanceState: Bundle?) {
         initTitleBar("添加闹钟")
         binding.model = model
+        reminder = arguments?.getParcelable("reminder")
+        if (reminder != null) {
+            model.reminder.set(reminder)
+            model.rule.set(reminder?.rule)
+            model.remarks.set(reminder?.remarks)
+        }
         getTitleBar().setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -90,7 +102,10 @@ class AddReminderFragment : BaseFragment<FragmentAddReminderBinding, AddReminder
 
     @SuppressLint("SetTextI18n")
     private fun initPickView() {
-        val timeList = DateTimeUtil.currentTime(DateTimeUtil.HH_MM).split(":")
+        val timeList =
+            (if (reminder == null) DateTimeUtil.currentTime(DateTimeUtil.HH_MM) else reminder?.time!!).split(
+                ":"
+            )
         for (i in pickerHourList.indices) {
             if (pickerHourList[i] == timeList[0]) {
                 hourValue = i
@@ -134,5 +149,26 @@ class AddReminderFragment : BaseFragment<FragmentAddReminderBinding, AddReminder
     }
 
     override fun initData() {
+        LiveDataBus.liveDataBus.with<String>("addRemarks").observe(viewLifecycleOwner, Observer {
+            model.remarks.set(it)
+        })
+    }
+
+    fun navigateRemarkFragment() {
+        if (findNavController()?.currentDestination?.id == R.id.addReminderFragment) {
+            findNavController()?.navigate(
+                AddReminderFragmentDirections.actionRemarkFragment(
+                    model.remarks.get() ?: ""
+                )
+            )
+        }
+    }
+
+    fun rule() {
+        val dialog = RuleDialog.instance(model.rule.get() ?: "")
+        dialog.clickEvent = {
+            model.rule.set(it)
+        }
+        dialog.show(childFragmentManager)
     }
 }

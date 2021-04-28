@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="selected"
+            type="Boolean" />
+
+        <variable
+            name="rule"
+            type="String" />
+
+        <import type="android.view.View"/>
+
+    </data>
+
+    <com.ruffian.library.widget.RLinearLayout
+        android:id="@+id/rLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
+        app:background_normal="@color/white"
+        app:background_pressed="#EDEDED"
+        app:background_selected="@color/purple_900">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{rule}"
+            android:textColor="@{selected?@color/purple_700:@color/black}"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_tick"
+            android:tint="@color/purple_700"
+            android:visibility="@{selected?View.VISIBLE:View.GONE}"/>
+    </com.ruffian.library.widget.RLinearLayout>
+</layout>

@@ -9,6 +9,7 @@ import com.common.tool.R
 import com.common.tool.base.BaseFragmentDialog
 import com.common.tool.notify.Reminder
 import com.common.tool.util.DateTimeUtil
+import com.common.tool.util.NonDoubleClick.clickWithTrigger
 
 /**
  * @author 李雄厚
@@ -21,6 +22,7 @@ class EditReminderDialog : BaseFragmentDialog<DialogEditBinding>() {
     private var minuteValue = 0
     private var minuteString = ""
     var clickEvent : ((Reminder) -> Unit)? = null
+    var moreSettingsEvent : ((Reminder) -> Unit)? = null
     companion object {
         fun instance(reminder: Reminder): EditReminderDialog =
             EditReminderDialog().apply {
@@ -40,10 +42,14 @@ class EditReminderDialog : BaseFragmentDialog<DialogEditBinding>() {
             reminder?.turnNn = !reminder!!.turnNn
             binding.data = reminder
         }
-        initPickView(binding,  reminder)
+        initPickView(binding, reminder)
 
-        binding.complete.setOnClickListener {
+        binding.complete.clickWithTrigger {
             clickEvent?.invoke(reminder!!)
+            dismiss()
+        }
+        binding.moreSettings.clickWithTrigger {
+            moreSettingsEvent?.invoke(reminder!!)
             dismiss()
         }
     }

@@ -34,6 +34,7 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
     private var reminderZoom = true
     private var testZoom = true
     private var selectedDel = false
+    private var reminderId = ""
     private lateinit var adapter: ReminderAdapter
     private lateinit var titleTick: AppCompatImageView
     private val reminders by lazy {
@@ -110,6 +111,7 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
     }
 
     override fun initData() {
+        //适配器点击事件
         adapter.clickEvent = { data, _, _ ->
             if (selectedDel) {
                 adapter.data.forEach {
@@ -120,7 +122,15 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
                 adapter.notifyDataSetChanged()
             } else {
                 val dialog = EditReminderDialog.instance(data)
+                //对话框完成回调
                 dialog.clickEvent = {
+                    if (it.turnNn) {
+                        it.timeLong = ReminderAdapter.setTimeLong(it.time)
+                        ReminderNotifyManager.setNotify(it)
+                        it.timeLong = -1L
+                    } else {
+                        ReminderNotifyManager.cancelWork(it.reminderId)
+                    }
                     run breaking@{
                         adapter.data.forEachIndexed { index, reminder ->
                             if (reminder.reminderId == it.reminderId) {
@@ -131,35 +141,50 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
                             }
                         }
                     }
+                    SharedPreferenceUtils.putListData("reminder", adapter.data)
 
+                }
+                //对话框更多设置回调
+                dialog.moreSettingsEvent = {
+                    reminderId = it.reminderId
+                    val bundle = Bundle()
+                    bundle.putParcelable("reminder", it)
+                    if (findNavController()?.currentDestination?.id == R.id.reminderFragment) {
+                        findNavController()?.navigate(R.id.actionAddReminderFragment, bundle)
+                    }
                 }
                 dialog.show(childFragmentManager)
             }
         }
-        adapter.longClickEvent = { data, _, _ ->
-            if (!data.selectedDel) {
-                selectedDel = true
+        //适配器长按回调
+        adapter.longClickEvent =
+            { data, _, _ ->
+                if (!data.selectedDel) {
+                    selectedDel = true
+                    adapter.data.forEach {
+                        it.selectedDel = true
+                        if (it.reminderId == data.reminderId) {
+                            it.selected = true
+                        }
+                    }
+                    titleTick.visibility = View.VISIBLE
+                    adapter.notifyDataSetChanged()
+                    setTranslationAnimation(binding.addReminder, false)
+                    setTranslationAnimation(binding.delReminder, true)
+                }
+            }
+        //适配器开关回调
+        adapter.checkedChangeListener =
+            { isChecked, reminderId ->
                 adapter.data.forEach {
-                    it.selectedDel = true
-                    if (it.reminderId == data.reminderId) {
-                        it.selected = true
+                    if (it.reminderId == reminderId) {
+                        it.turnNn = isChecked
                     }
                 }
-                titleTick.visibility = View.VISIBLE
-                adapter.notifyDataSetChanged()
-                setTranslationAnimation(binding.addReminder, false)
-                setTranslationAnimation(binding.delReminder, true)
+                SharedPreferenceUtils.putListData("reminder", adapter.data)
             }
-        }
-        adapter.checkedChangeListener = { isChecked, reminderId ->
-            adapter.data.forEach {
-                if (it.reminderId == reminderId) {
-                    it.turnNn = isChecked
-                }
-            }
-            SharedPreferenceUtils.putListData("reminder", adapter.data)
-        }
 
+        //闹钟响应事件
         reminderModel.reminder.observe(this) {
             if (it.rule == "只响一次") {
                 run breaking@{
@@ -177,11 +202,26 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
 
         }
 
+        //添加闹钟回调
         LiveDataBus.liveDataBus.with<Reminder>("addReminder").observe(viewLifecycleOwner, Observer {
-//            it.timeLong = ReminderAdapter.setTimeLong(it.time)
+            it.timeLong = ReminderAdapter.setTimeLong(it.time)
             ReminderNotifyManager.setNotify(it)
             it.timeLong = -1L
-            adapter.addData(it)
+            if (reminderId.isEmpty()) {
+                adapter.addData(it)
+            } else {
+                run breaking@{
+                    adapter.data.forEachIndexed { index, reminder ->
+                        if (reminder.reminderId == it.reminderId) {
+                            adapter.data.remove(reminder)
+                            adapter.data.add(index, it)
+                            adapter.notifyDataSetChanged()
+                            return@breaking
+                        }
+                    }
+                }
+            }
+            SharedPreferenceUtils.putListData("reminder", adapter.data)
         })
 
         handler.postDelayed(task, (60 - DateTimeUtil.currentTime(DateTimeUtil.SS).toLong()) * 1000)
@@ -213,18 +253,23 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
     }
 
     fun navigateAddReminderFragment() {
+        reminderId = ""
         if (findNavController()?.currentDestination?.id == R.id.reminderFragment) {
             findNavController()?.navigate(R.id.actionAddReminderFragment)
         }
     }
 
     fun deleteReminder() {
-        adapter.data.forEachIndexed { index, reminder ->
-            if (reminder.selected) {
-                adapter.data.removeAt(index)
-                ReminderNotifyManager.cancelWork(reminder.reminderId)
+        run breaking@{
+            adapter.data.forEachIndexed { index, reminder ->
+                if (reminder.selected) {
+                    adapter.data.removeAt(index)
+                    ReminderNotifyManager.cancelWork(reminder.reminderId)
+                    return@breaking
+                }
             }
         }
+
         adapter.notifyDataSetChanged()
     }
 

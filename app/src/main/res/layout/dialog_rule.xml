@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.common.tool.base.rv.BaseAdapter" />
+
+    </data>
+
+    <com.ruffian.library.widget.RLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:background_normal="@color/white"
+        app:corner_radius_top_left="15dp"
+        app:corner_radius_top_right="15dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            rvLAdapter="@{adapter}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:overScrollMode="never" />
+    </com.ruffian.library.widget.RLinearLayout>
+</layout>

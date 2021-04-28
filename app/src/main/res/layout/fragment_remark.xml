@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.common.jar.reminder.RemarkFragment" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_layout" />
+
+
+        <com.ruffian.library.widget.REditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@null"
+            android:hint="请输入闹钟备注"
+            android:padding="10dp"
+            android:text="@={fragment.addRemarks}"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="20dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:background_normal="#ededed"
+            app:border_color_normal="@color/purple_700"
+            app:border_width_normal="2dp"
+            app:corner_radius="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            android:text="闹钟备注将再该闹钟响铃时显示在响铃页面"
+            android:textColor="@color/font99" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
