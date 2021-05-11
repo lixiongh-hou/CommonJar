@@ -8,6 +8,7 @@ import com.common.jar.R
 import com.common.jar.databinding.ActivityReminderBinding
 import com.common.tool.base.BaseActivity
 import com.common.tool.base.EmptyViewModel
+import com.common.tool.data.exception.ApiError
 import com.common.tool.view.FixFragmentNavigator
 
 /**
@@ -32,13 +33,11 @@ class ReminderActivity : BaseActivity<ActivityReminderBinding, EmptyViewModel>()
 
         // set navigation graph
         navController.setGraph(R.navigation.nav_reminder)
-
     }
 
     override fun initData() {
 
     }
-
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         touchEvent?.invoke(ev)

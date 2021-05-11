@@ -24,6 +24,9 @@
         <activity android:name=".paging.PagingActivity"/>
         <activity android:name=".reminder.ReminderActivity"
             android:theme="@style/Theme.NoTitle"/>
+        <activity android:name=".life_cycle.LifeCycleActivity"/>
+
+        <service android:name=".life_cycle.service.MyMusicService"/>
     </application>
 
 </manifest>

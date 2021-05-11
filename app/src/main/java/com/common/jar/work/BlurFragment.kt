@@ -28,7 +28,7 @@ class BlurFragment : BaseFragment<FragmentBlurBinding, BlurViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         EditTitleLiveData.post("模糊图片")
         model.setImageUri(BlurFragmentArgs.fromBundle(requireArguments()).uri)
-        binding.uri = model.imageUri
+        binding.uri = BlurFragmentArgs.fromBundle(requireArguments()).uri
 
         binding.goButton.setOnClickListener { model.applyBlur(blurLevel) }
 
@@ -37,8 +37,9 @@ class BlurFragment : BaseFragment<FragmentBlurBinding, BlurViewModel>() {
         // Setup view output image file button
         binding.seeFileButton.setOnClickListener {
             binding.blurImage.visibility = View.VISIBLE
-            binding.blurUri = model.outputUri
+            binding.blurUri = model.outputString
         }
+
     }
 
     override fun initData() {
@@ -62,7 +63,7 @@ class BlurFragment : BaseFragment<FragmentBlurBinding, BlurViewModel>() {
                 val outputImageUri = workInfo.outputData.getString(KEY_IMAGE_URI)
 
                 if (!outputImageUri.isNullOrEmpty()) {
-                    model.setOutputUri(outputImageUri as String)
+                    model.setOutputUri(outputImageUri)
                     binding.seeFileButton.visibility = View.VISIBLE
                 }
 

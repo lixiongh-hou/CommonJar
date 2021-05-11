@@ -1,9 +1,9 @@
 package com.common.tool.proxy
 
-import com.common.tool.data.Banner
 import com.common.tool.data.DataConvert.convert
 import com.common.tool.data.DataConvert.convertNetworkError
 import com.common.tool.data.HttpClient
+import com.common.tool.data.entity.ResultBody
 import com.common.tool.data.exception.ApiError
 import com.common.tool.data.exception.ServerException
 import com.common.tool.proxy.ICommonRequest.Companion.runInDispatcherIO
@@ -30,11 +30,11 @@ internal class CommonRemoteRequest : ICommonRequest {
         }
     }
 
-    override suspend fun banner(success: (MutableList<Banner>) -> Unit, error: (ApiError) -> Unit) {
+    override suspend fun resultBody(page: String, success: (ResultBody) -> Unit, error: (ApiError) -> Unit) {
         checkNetwork(error) { return }
         runInDispatcherIO {
             try {
-                HttpClient.getCommonService().banner()
+                HttpClient.getCommonService().resultBody(page)
                     .convert {
                         success.invoke(it!!)
                     }

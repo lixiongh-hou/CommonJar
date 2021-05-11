@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="triggerDelayKey" type="id"/>
-    <item name="triggerLastTimeKey" type="id"/>
+    <item name="triggerDelayKey" type="id" />
+    <item name="triggerLastTimeKey" type="id" />
+
+    <item name="multiStateId" type="id" />
+
+    <item name="mSmartRefreshLayout" type="id" />
 
 </resources>

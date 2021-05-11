@@ -3,7 +3,7 @@ package com.common.jar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.common.tool.base.BaseViewModel
-import com.common.tool.data.Banner
+import com.common.tool.data.entity.ResultBody
 import com.common.tool.proxy.CommonProxy
 import kotlinx.coroutines.launch
 
@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
  */
 class MainViewModel : BaseViewModel() {
 
-    val success = MutableLiveData<MutableList<Banner>>()
+    val success = MutableLiveData<ResultBody>()
 
-    fun getBanner() {
+    fun resultBody(page: String) {
         viewModelScope.launch {
-            CommonProxy.proxy.banner({
+            CommonProxy.proxy.resultBody(page, {
                 success.postValue(it)
             }, {
-                toastLiveData.postValue(it.message)
+                errorLiveData.postValue(it.message)
             })
         }
     }

@@ -89,14 +89,57 @@ object DateTimeUtil {
         val second = (ms - day * dd - hour * hh - minute * mi) / ss
         //毫秒
         val milliSecond = ms - day * dd - hour * hh - minute * mi - second * ss
-
-        val sb = StringBuilder()
-        when {
-            day > 0 -> sb.append(day).append("天")
-            hour > 0 -> sb.append(hour).append("小时").append(minute).append("分钟")
-            minute > 0 -> sb.append(minute).append("分钟")
-            else -> if (showSecond) sb.append(second).append("秒") else sb.append("不到1分钟")
+        return when {
+            day > 0 -> "${day}天"
+            hour > 0 -> "${hour}小时${minute}分钟"
+            minute > 0 -> "${minute}分钟"
+            else -> if (showSecond) "${second}秒" else "不到1分钟"
         }
-        return sb.toString()
+    }
+
+    /**
+     * 根据当前时间格式得到是什么时候发生的
+     */
+    @JvmStatic
+    fun getTimeFormatText(time: String?): String {
+        if (time == null) {
+            return ""
+        }
+        val formatter = SimpleDateFormat(YYYY_MM_DD_HH_MM_SS, Locale.getDefault())
+        val date: Date = formatter.parse(time) ?: return ""
+        val diff = Date().time - date.time
+        val r: Long
+
+        //1分钟
+        val minute = 60 * 1000.toLong()
+        //1小时
+        val hour = 60 * minute
+        //1天
+        val day = 24 * hour
+        //月
+        val month = 31 * day
+        //年
+        val year = 12 * month
+
+        return when {
+            diff > year -> time
+            diff > month -> {
+                r = (diff / month)
+                "${r}月前"
+            }
+            diff > day -> {
+                r = (diff / day)
+                "${r}天前"
+            }
+            diff > hour -> {
+                r = (diff / hour)
+                "${r}小时前"
+            }
+            diff > minute -> {
+                r = (diff / minute)
+                "${r}分钟前"
+            }
+            else -> "刚刚"
+        }
     }
 }

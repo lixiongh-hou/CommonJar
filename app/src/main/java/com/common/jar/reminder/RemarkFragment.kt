@@ -46,6 +46,7 @@ class RemarkFragment : BaseFragment<FragmentRemarkBinding, EmptyViewModel>() {
         }
     }
 
+
     override fun initData() {
     }
 }

@@ -53,4 +53,8 @@ dependencies {
 
     //https://github.com/Carbs0126/NumberPickerView/blob/master/README_ch.md
     implementation 'cn.carbswang.android:NumberPickerView:1.2.0'
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    implementation 'com.lzy.widget:ninegridview:0.2.0'
 }

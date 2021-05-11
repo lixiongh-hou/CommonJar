@@ -31,7 +31,7 @@ class HttpClient private constructor(){
             val clazz = serviceMap.get(T::class.java.name)
             if (clazz == null) {
                 val create = initClient(timeout, unit).create(T::class.java)
-                serviceMap.put(T::class.java.name, (create as T)!!)
+                serviceMap.put(T::class.java .name, (create as T)!!)
             }
             return serviceMap[T::class.java.name] as T
         }
@@ -49,7 +49,7 @@ class HttpClient private constructor(){
                 )
                 .build()
             return Retrofit.Builder()
-                .baseUrl("https://www.wanandroid.com/"/*这里输入自己的服务器*/)
+                .baseUrl("http://lite.magr.site/"/*这里输入自己的服务器*/)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)

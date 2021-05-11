@@ -1,10 +1,7 @@
 package com.common.tool.proxy
 
-import com.common.tool.data.Banner
-import com.common.tool.data.DataConvert.convertNetworkError
+import com.common.tool.data.entity.ResultBody
 import com.common.tool.data.exception.ApiError
-import com.common.tool.data.exception.ServerException
-import com.common.tool.proxy.ICommonRequest.Companion.runInDispatcherIO
 
 /**
  * @author 李雄厚
@@ -12,7 +9,7 @@ import com.common.tool.proxy.ICommonRequest.Companion.runInDispatcherIO
  * @features 本地访问
  */
 internal class CommonLocalRequest : ICommonRequest {
-    override suspend fun banner(success: (MutableList<Banner>) -> Unit, error: (ApiError) -> Unit) {
+    override suspend fun resultBody(page: String, success: (ResultBody) -> Unit, error: (ApiError) -> Unit) {
         error.invoke(ApiError(-1,"网络不可用"))
     }
 

@@ -44,7 +44,7 @@ class ReminderDialog : BaseFragmentDialog<DialogReminderBinding>() {
             if (dialog.isAdded || dialog.isResumed || dialog.isVisible) {
                 dialog.binding.tvContent.append(string)
             } else {
-                with(dialog) {
+                dialog.apply {
                     setOutCancel(false)
                     setAnimStyle(R.style.DialogCentreAnim)
                     setMargin(50)
@@ -61,9 +61,8 @@ class ReminderDialog : BaseFragmentDialog<DialogReminderBinding>() {
 
             }
         }
-
-        private  fun setTimeLong(hhAndMm: String): Long {
-            val time = "${DateTimeUtil.currentTime(DateTimeUtil.YYYY_MM)}-${(DateTimeUtil.currentTime(DateTimeUtil.DD).toInt() + 1)} ${hhAndMm}:00"
+        private fun setTimeLong(hhAndMm: String): Long {
+            val time = "${ReminderNotifyManager.CURRENT_YEAR_MONTH_AND_DAY} ${hhAndMm}:00"
             return if (DateTimeUtil.getTimeMillis(
                     time,
                     DateTimeUtil.YYYY_MM_DD_HH_MM_SS

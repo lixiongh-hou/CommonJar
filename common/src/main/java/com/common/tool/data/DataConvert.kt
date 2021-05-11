@@ -139,15 +139,15 @@ internal object DataConvert {
 
     private fun <T> BaseResponse<T>.convertErrorMessage(defaultError: String = "请求失败"): ApiError {
         //根据后台给的字段自行修改
-        return when (this.errorCode) {
-            100 -> ApiError(this.errorCode, "没有绑定设备")
-            else -> ApiError(this.errorCode, this.errorMsg ?: defaultError)
+        return when (this.code) {
+            100 -> ApiError(this.code, "没有绑定设备")
+            else -> ApiError(this.code, this.msg ?: defaultError)
         }
     }
 
     fun <T> BaseResponse<T>.convert(success: (T?) -> Unit) {
         if (this.success()) {
-            success(this.data)
+            success(this.result)
         } else {
             throw ServerException(convertErrorMessage())
         }

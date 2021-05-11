@@ -21,5 +21,8 @@
     <string name="turn_on_reminder">开启通知</string>
     <string name="close_reminder">关闭通知</string>
 
+    <string name="android">Android</string>
+    <string name="_0">0</string>
+
 
 </resources>

@@ -10,4 +10,6 @@ import com.common.tool.bridge.EventLiveData
  */
 open class BaseViewModel: ViewModel() {
     val toastLiveData = EventLiveData<String>()
+
+    val errorLiveData = EventLiveData<String>()
 }

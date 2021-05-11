@@ -14,14 +14,10 @@ import com.common.tool.base.BaseViewModel
 class BlurViewModel : BaseViewModel() {
     internal var imageUri: Uri? = null
     internal var outputUri: Uri? = null
+    internal var outputString: String? = null
     private val workManager = WorkManager.getInstance(BaseApp.instance)
-    internal val outputWorkInfos: LiveData<List<WorkInfo>>
-    internal val progressWorkInfoItems: LiveData<List<WorkInfo>>
-
-    init {
-        outputWorkInfos = workManager.getWorkInfosByTagLiveData(TAG_OUTPUT)
-        progressWorkInfoItems = workManager.getWorkInfosByTagLiveData(TAG_PROGRESS)
-    }
+    internal val outputWorkInfos: LiveData<List<WorkInfo>> = workManager.getWorkInfosByTagLiveData(TAG_OUTPUT)
+    internal val progressWorkInfoItems: LiveData<List<WorkInfo>> = workManager.getWorkInfosByTagLiveData(TAG_PROGRESS)
 
     internal fun cancelWork() {
         workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
@@ -92,5 +88,6 @@ class BlurViewModel : BaseViewModel() {
 
     internal fun setOutputUri(outputImageUri: String?) {
         outputUri = uriOrNull(outputImageUri)
+        outputString = outputImageUri
     }
 }

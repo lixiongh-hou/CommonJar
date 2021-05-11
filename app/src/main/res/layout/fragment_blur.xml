@@ -6,11 +6,11 @@
 
         <variable
             name="uri"
-            type="android.net.Uri" />
+            type="String" />
 
         <variable
             name="blurUri"
-            type="android.net.Uri" />
+            type="String" />
     </data>
 
     <LinearLayout

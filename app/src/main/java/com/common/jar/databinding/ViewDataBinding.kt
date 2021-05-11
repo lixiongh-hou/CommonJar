@@ -6,7 +6,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import coil.loadAny
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.common.tool.base.BaseApp
 
 /**
@@ -17,13 +19,39 @@ import com.common.tool.base.BaseApp
 object ViewDataBinding {
 
     @JvmStatic
-    @BindingAdapter(value = ["imageUri"])
-    fun setImageUri(imageView: ImageView, uri: Uri?) {
+    @BindingAdapter(value = ["imageUri", "isUri", "isHttp", "circle", "roundedCorners"], requireAll = false)
+    fun setImageUri(
+        imageView: ImageView,
+        uri: String?,
+        isUri: Boolean = false,
+        isHttp: Boolean = false,
+        circle: Boolean = false,
+        roundedCorners: Boolean = false
+    ) {
         if (uri == null) {
             return
         }
-        imageView.load(uri) {
+
+        imageView.loadAny(
+            when {
+                isUri -> {
+                    Uri.parse(uri)
+                }
+                isHttp -> {
+                    uri
+                }
+                else -> {
+                    uri
+                }
+            }
+        ) {
             crossfade(true)
+            if (circle) {
+                transformations(CircleCropTransformation())
+            }
+            if (roundedCorners) {
+                transformations(RoundedCornersTransformation(8F))
+            }
         }
     }
 
@@ -38,12 +66,14 @@ object ViewDataBinding {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["rvGAdapter", "size"])
-    fun setRvLAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>?, size: Int) {
+    @BindingAdapter(value = ["rvGAdapter", "size"], requireAll = false)
+    fun setRvGAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>?, size: Int = 0) {
         if (adapter == null) {
             return
         }
-        recyclerView.layoutManager = GridLayoutManager(BaseApp.instance, size)
+        if (size >= 1) {
+            recyclerView.layoutManager = GridLayoutManager(BaseApp.instance, size)
+        }
         recyclerView.adapter = adapter
     }
 }

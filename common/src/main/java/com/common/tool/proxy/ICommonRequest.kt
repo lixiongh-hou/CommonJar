@@ -1,6 +1,6 @@
 package com.common.tool.proxy
 
-import com.common.tool.data.Banner
+import com.common.tool.data.entity.ResultBody
 import com.common.tool.data.exception.ApiError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,13 +11,13 @@ import kotlinx.coroutines.withContext
  * @features 访问控制器
  */
 interface ICommonRequest {
-    companion object{
-        suspend fun runInDispatcherIO(block: suspend () -> Unit){
-            withContext(Dispatchers.IO){
+    companion object {
+        suspend fun runInDispatcherIO(block: suspend () -> Unit) {
+            withContext(Dispatchers.IO) {
                 block.invoke()
             }
         }
     }
 
-    suspend fun banner(success: (MutableList<Banner>) -> Unit, error: (ApiError) -> Unit)
+    suspend fun resultBody(page: String, success: (ResultBody) -> Unit, error: (ApiError) -> Unit)
 }

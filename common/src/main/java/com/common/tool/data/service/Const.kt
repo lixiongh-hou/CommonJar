@@ -11,7 +11,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
  * @features 接口地址
  */
 internal object Url{
-    const val Banner = "banner/json"/*自己接口地址*/
+    const val URL = "post/list"/*自己接口地址*/
 
 
     internal fun JsonObject.convertRequestBody(mediaType: MediaType? = ConvertMediaType.JSON) = this.toString().toRequestBody(mediaType)

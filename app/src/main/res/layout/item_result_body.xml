@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.common.jar.VoResultBody" />
+
+       <!-- <variable
+            name="adapter"
+            type="com.common.tool.base.rv.BaseAdapter" />
+-->
+        <import type="com.common.tool.util.DateTimeUtil" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="13dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                circle="@{true}"
+                imageUri="@{data.avatar}"
+                isHttp="@{true}"
+                android:layout_width="45dp"
+                android:layout_height="45dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{data.name}"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@{DateTimeUtil.getTimeFormatText(data.time)}"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:text="@{data.content}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <com.common.jar.view.nine_grid.NineGridView
+            android:id="@+id/nineGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="13dp"
+            app:ngv_gridSpacing="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+        <!--<androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            rvGAdapter="@{adapter}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="13dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nineGridView">
+
+
+            <com.ruffian.library.widget.RTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp"
+                android:text="@string/android"
+                app:background_normal="#FFF1EE"
+                app:corner_radius="3dp"
+                app:text_color_normal="#E58566"
+                tools:ignore="RelativeOverlap" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/praise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawablePadding="3dp"
+                android:gravity="center_vertical"
+                android:text="@string/_0"
+                app:drawableStartCompat="@drawable/ic_praise" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/praise"
+                android:drawablePadding="3dp"
+                android:gravity="center_vertical"
+                android:text="@string/_0"
+                app:drawableStartCompat="@drawable/ic_message" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/browse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/message"
+                android:drawablePadding="3dp"
+                android:gravity="center_vertical"
+                android:text="@string/_0"
+                app:drawableStartCompat="@drawable/ic_browse" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

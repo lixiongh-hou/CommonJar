@@ -17,6 +17,7 @@ import com.common.jar.databinding.FragmentReminderBinding
 import com.common.jar.dialog.EditReminderDialog
 import com.common.tool.base.BaseFragment
 import com.common.tool.base.EmptyViewModel
+import com.common.tool.data.exception.ApiError
 import com.common.tool.live_data_bus.LiveDataBus
 import com.common.tool.notify.Reminder
 import com.common.tool.notify.ReminderNotifyManager
@@ -53,6 +54,7 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
         }
         SharedPreferenceUtils.getListData("reminder", Reminder::class.java)
     }
+
 
     override fun onBackClickListener() {
         if (selectedDel) {
@@ -108,7 +110,9 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
         (requireActivity() as ReminderActivity).touchEvent = {
             dispatchTouchEvent(it)
         }
+
     }
+
 
     override fun initData() {
         //适配器点击事件

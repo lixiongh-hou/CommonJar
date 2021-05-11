@@ -1,8 +1,9 @@
 package com.common.tool.data.service
 
-import com.common.tool.data.Banner
 import com.common.tool.data.BaseResponse
+import com.common.tool.data.entity.ResultBody
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 /**
  * @author 李雄厚
@@ -13,8 +14,6 @@ interface CommonService {
     /**
      * 写入自己的服务器，这只是个例子
      */
-    @GET(Url.Banner)
-    suspend fun banner(): BaseResponse<MutableList<Banner>>
-//    @POST(Url.Banner)
-//  suspend fun banner(@Body body: RequestBody): BaseResponse<MutableList<Banner>>
+    @GET(Url.URL)
+    suspend fun resultBody(@Query("page") page: String): BaseResponse<ResultBody>
 }

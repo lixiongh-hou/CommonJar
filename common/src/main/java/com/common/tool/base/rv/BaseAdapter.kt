@@ -59,4 +59,11 @@ abstract class BaseAdapter<T, Binding : ViewDataBinding> :
     abstract fun createBinding(parent: ViewGroup, viewType: Int): Binding
 
     abstract fun bind(binding: Binding, data: T, position: Int)
+
+    /**
+     * 解决全局刷新时图片闪烁
+     */
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }
