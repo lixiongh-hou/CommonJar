@@ -1,4 +1,4 @@
-package com.common.tool.proxy
+package com.common.tool.data.proxy
 
 import com.common.tool.data.entity.ResultBody
 import com.common.tool.data.exception.ApiError

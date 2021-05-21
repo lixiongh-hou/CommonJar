@@ -1,9 +1,8 @@
 package com.common.jar.reminder
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
 import com.common.tool.base.BaseViewModel
-import com.common.tool.live_data_bus.LiveDataBus
+import com.common.tool.bus.LiveDataBus
 import com.common.tool.notify.Reminder
 import java.util.*
 

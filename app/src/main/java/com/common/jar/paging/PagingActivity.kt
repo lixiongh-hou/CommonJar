@@ -15,12 +15,11 @@ import com.common.tool.view.FixFragmentNavigator
  *
  * @features 主界面
  */
-class PagingActivity: BaseActivity<ActivityPagingBinding, EmptyViewModel>() {
-    override val layoutId: Int
-        get() = R.layout.activity_paging
+class PagingActivity : BaseActivity<ActivityPagingBinding, EmptyViewModel>() {
+    override val layoutId: Int = R.layout.activity_paging
 
     override fun initView(savedInstanceState: Bundle?) {
-        EditTitleLiveData.updateLiveData.observe(this){
+        EditTitleLiveData.updateLiveData.observe(this) {
             title = it
         }
 
@@ -28,7 +27,8 @@ class PagingActivity: BaseActivity<ActivityPagingBinding, EmptyViewModel>() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container)!!
         // setup custom navigator
-        val navigator = FixFragmentNavigator(this, navHostFragment.childFragmentManager, R.id.container)
+        val navigator =
+            FixFragmentNavigator(this, navHostFragment.childFragmentManager, R.id.container)
 
         navController.navigatorProvider.addNavigator(navigator)
 

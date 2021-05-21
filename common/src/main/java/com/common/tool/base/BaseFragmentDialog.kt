@@ -145,7 +145,7 @@ abstract class BaseFragmentDialog<Binding: ViewDataBinding> : AppCompatDialogFra
      * @param height 固定高度，默认为0,自适应高度
      * @return
      */
-    fun setSize(width: Int, height: Int) {
+    fun setSize(width: Int = 0, height: Int = 0) {
         mWidth = width
         mHeight = height
     }

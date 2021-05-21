@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.common.tool.base.BaseViewModel
 import com.common.tool.data.entity.ResultBody
-import com.common.tool.proxy.CommonProxy
+import com.common.tool.data.proxy.CommonProxy
 import kotlinx.coroutines.launch
 
 /**

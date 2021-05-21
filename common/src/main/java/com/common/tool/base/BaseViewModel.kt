@@ -1,7 +1,7 @@
 package com.common.tool.base
 
 import androidx.lifecycle.ViewModel
-import com.common.tool.bridge.EventLiveData
+import com.common.tool.event_live_bridge.EventLiveData
 
 /**
  * @author 李雄厚

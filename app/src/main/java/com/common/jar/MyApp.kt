@@ -3,6 +3,9 @@ package com.common.jar
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import com.common.tool.base.BaseApp
+import net.mikaelzero.mojito.Mojito
+import net.mikaelzero.mojito.loader.glide.GlideImageLoader
+import net.mikaelzero.mojito.view.sketch.SketchImageLoadFactory
 import okhttp3.Cache
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
@@ -17,6 +20,11 @@ class MyApp : BaseApp(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
+        //查看大图框架
+        Mojito.initialize(
+            GlideImageLoader.with(this),
+            SketchImageLoadFactory()
+        )
     }
 
     override fun newImageLoader(): ImageLoader {

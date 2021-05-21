@@ -12,8 +12,10 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import coil.imageLoader
 import coil.load
 import coil.request.ImageRequest
@@ -21,10 +23,12 @@ import coil.transform.RoundedCornersTransformation
 import com.common.jar.databinding.ActivityMainBinding
 import com.common.jar.life_cycle.LifeCycleActivity
 import com.common.jar.paging.PagingActivity
+import com.common.jar.play_music.MusicActivity
 import com.common.jar.reminder.ReminderActivity
 import com.common.jar.view.nine_grid.NineGridView
 import com.common.jar.work.WorkActivity
 import com.common.tool.base.BaseActivity
+import com.common.tool.base.BaseApp
 import com.common.tool.base.rv.BaseAdapter
 import com.common.tool.util.solveNestQuestion
 import com.google.gson.Gson
@@ -40,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         initRefresh()
         binding.activity = this
 
-        adapter = ResultBodyAdapter()
+        adapter = ResultBodyAdapter(this)
         binding.adapter = adapter
         binding.recyclerView.solveNestQuestion()
 
@@ -55,6 +59,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     transformations(RoundedCornersTransformation(8F))
                 }
             }
+
             override fun getCacheImage(url: String): Bitmap? = null
 
         })
@@ -102,12 +107,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             Handler(Looper.myLooper()!!).postDelayed({
                 Log.e("测试", Gson().toJson(list))
-                if (isRefresh()){
+                if (isRefresh()) {
                     adapter.refreshData(list)
-                }else{
+                } else {
                     adapter.addAllData(list)
                 }
-                successAfter(0)
+                successAfter(adapter.itemCount)
             }, 900)
 
         })
@@ -130,6 +135,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         menu?.add(0, 2, 0, "分页加载")
         menu?.add(0, 3, 0, "闹钟提醒")
         menu?.add(0, 4, 0, "LifeCycle")
+        menu?.add(0, 5, 0, "音乐播放")
         return true
     }
 
@@ -139,6 +145,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             2 -> startActivity(Intent(this, PagingActivity::class.java))
             3 -> startActivity(Intent(this, ReminderActivity::class.java))
             4 -> startActivity(Intent(this, LifeCycleActivity::class.java))
+            5 -> startActivity(Intent(this, MusicActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

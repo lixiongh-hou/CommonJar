@@ -12,7 +12,7 @@ import com.common.jar.R
 import com.common.jar.databinding.FragmentAddReminderBinding
 import com.common.jar.dialog.RuleDialog
 import com.common.tool.base.BaseFragment
-import com.common.tool.live_data_bus.LiveDataBus
+import com.common.tool.bus.LiveDataBus
 import com.common.tool.notify.Reminder
 import com.common.tool.util.DateTimeUtil
 import com.common.tool.util.DateTimeUtil.formatTime

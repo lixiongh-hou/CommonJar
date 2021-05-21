@@ -1,4 +1,4 @@
-package com.common.tool.proxy
+package com.common.tool.data.proxy
 
 import com.common.tool.data.DataConvert.convert
 import com.common.tool.data.DataConvert.convertNetworkError
@@ -6,7 +6,7 @@ import com.common.tool.data.HttpClient
 import com.common.tool.data.entity.ResultBody
 import com.common.tool.data.exception.ApiError
 import com.common.tool.data.exception.ServerException
-import com.common.tool.proxy.ICommonRequest.Companion.runInDispatcherIO
+import com.common.tool.data.proxy.ICommonRequest.Companion.runInDispatcherIO
 import com.common.tool.util.NetworkUtil
 
 /**

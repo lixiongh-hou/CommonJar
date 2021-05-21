@@ -1,6 +1,5 @@
-package com.common.tool.proxy
+package com.common.tool.data.proxy
 
-import android.util.Log
 import com.common.tool.util.NetworkUtil.isNetworkConnected
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method

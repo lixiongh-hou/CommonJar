@@ -1,4 +1,4 @@
-package com.common.tool.bridge
+package com.common.tool.event_live_bridge
 
 /**
  * @author 李雄厚

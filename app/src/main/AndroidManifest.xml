@@ -5,15 +5,18 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CommonJar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +28,14 @@
         <activity android:name=".reminder.ReminderActivity"
             android:theme="@style/Theme.NoTitle"/>
         <activity android:name=".life_cycle.LifeCycleActivity"/>
+        <activity android:name=".play_music.MusicActivity"
+            android:theme="@style/Theme.NoTitle"/>
+        <activity android:name=".play_music.PlayMusicActivity"
+            android:theme="@style/Theme.NoTitle"
+            android:launchMode="singleTask"/>
 
         <service android:name=".life_cycle.service.MyMusicService"/>
+        <service android:name=".play_music.service.AudioService"/>
     </application>
 
 </manifest>

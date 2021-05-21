@@ -85,8 +85,7 @@ class SelectImageFragment : BaseFragment<FragmentSelectBinding, SelectImageModel
         if (!checkAllPermissions()) {
             if (permissionRequestCount < MAX_NUMBER_REQUEST_PERMISSIONS) {
                 permissionRequestCount += 1
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
+                requestPermissions(
                     permissions,
                     REQUEST_CODE_PERMISSIONS
                 )

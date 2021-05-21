@@ -112,18 +112,6 @@ abstract class BaseFragment<Binding : ViewDataBinding, VM : BaseViewModel> : Fra
 
         DLNetManager.getInstance(requireActivity().application).getNetTypeLiveData()
             .observe(viewLifecycleOwner, Observer {
-                // 网络状态改变
-//            Log.e("测试", "Main网络状态改变：${it},,,,,${this.javaClass.simpleName}")
-//            //binding.netType = str
-//            if (it == NetType.WIFI) {
-//                if (NetUtils.is5GWifiConnected(requireContext())) {
-//                    Log.e("测试", "这是5G WI-FI,,,,${this.javaClass.simpleName}")
-//                } else{
-//                    Log.e("测试", "这是2.4G WI-FI,,,,${this.javaClass.simpleName}")
-//                }
-//                Log.e("测试", "WI-FI名：${NetUtils.getConnectedWifiSSID(requireContext())},,,${this.javaClass.simpleName}")
-//            }
-
                 if (it == NetType.NONE) {
                     Log.e("测试", "没有网络$className")
                     multiStateContainer?.run { show<NetworkState>() }

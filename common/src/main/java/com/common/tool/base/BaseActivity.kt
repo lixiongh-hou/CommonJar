@@ -3,7 +3,10 @@ package com.common.tool.base
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -37,6 +40,7 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
     private val className = this.javaClass.simpleName
     lateinit var binding: Binding
     lateinit var model: VM
+    private lateinit var cl: RelativeLayout
     abstract val layoutId: Int
     private lateinit var reminderModel: ReminderModel
 
@@ -124,6 +128,19 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
                 initData()
             }
         })
+    }
+
+    protected fun getTitleBar(): RelativeLayout {
+        return cl
+    }
+
+    fun initTitleBar(title: String) {
+        cl = binding.root.findViewById(R.id.baseTitleLay)
+        val tvTitle = cl.findViewById(R.id.baseTitleText) as AppCompatTextView
+        tvTitle.text = title
+        (cl.findViewById(R.id.baseTitleClose) as (AppCompatImageView)).setOnClickListener {
+            finish()
+        }
     }
 
     fun toast(message: String?) {
@@ -275,7 +292,7 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
      * 启用刷新
      */
     protected fun setEnableRefresh(enable: Boolean = true) {
-        mSmartRefreshLayout?.apply {
+        mSmartRefreshLayout?.run {
             setEnableRefresh(enable)
             setEnableOverScrollDrag(true)
         }
@@ -285,7 +302,7 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
      * 启用加载
      */
     protected fun setEnableLoadMore(enable: Boolean = true) {
-        mSmartRefreshLayout?.apply {
+        mSmartRefreshLayout?.run {
             setEnableLoadMore(enable)
             setEnableOverScrollDrag(true)
         }

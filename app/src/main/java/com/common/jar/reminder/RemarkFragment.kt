@@ -10,7 +10,7 @@ import com.common.jar.R
 import com.common.jar.databinding.FragmentRemarkBinding
 import com.common.tool.base.BaseFragment
 import com.common.tool.base.EmptyViewModel
-import com.common.tool.live_data_bus.LiveDataBus
+import com.common.tool.bus.LiveDataBus
 import com.common.tool.util.NonDoubleClick.clickWithTrigger
 
 /**

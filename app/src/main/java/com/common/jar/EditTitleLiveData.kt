@@ -1,6 +1,6 @@
 package com.common.jar
 
-import com.common.tool.bridge.EventLiveData
+import com.common.tool.event_live_bridge.EventLiveData
 
 /**
  * @author 李雄厚

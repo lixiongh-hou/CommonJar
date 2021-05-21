@@ -1,14 +1,13 @@
+package com.common.tool.sp
+
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.Uri
 import com.common.tool.base.BaseApp
-import com.google.gson.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
-import java.lang.reflect.Type
-import java.util.*
 import kotlin.reflect.KProperty
 
 /**
@@ -20,20 +19,21 @@ import kotlin.reflect.KProperty
  * 2.存储数据  rsa = "我存储的数据"
  * 3.取出数据 Toast.show(rsa)
  */
-class SharedPref<T>() {
+@Suppress("UNCHECKED_CAST")
+class Preference<T>(){
     private var keyName: String? = null
     private var defaultValue: T? = null
 
-    constructor(keyName: String, defaultValue: T) : this() {
+    constructor(keyName: String,defaultValue: T) : this() {
         this.keyName = keyName
         this.defaultValue = defaultValue
     }
 
     private val prefs: SharedPreferences by lazy {
-        BaseApp.instance.applicationContext.getSharedPreferences("Common", Context.MODE_PRIVATE)
+        BaseApp.instance.applicationContext.getSharedPreferences("Preference", Context.MODE_PRIVATE)
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T  {
         return findSharedPreference(keyName!!, defaultValue!!)
     }
 
@@ -47,7 +47,7 @@ class SharedPref<T>() {
      * 没有查找到value 就返回默认的序列化对象，然后经过反序列化返回
      */
     @Suppress("UNCHECKED_CAST")
-    private fun findSharedPreference(name: String, default: T): T = with(prefs) {
+    private fun  findSharedPreference(name: String, default: T): T = with(prefs) {
         val res: Any? = when (default) {
             is Long -> getLong(name, default)
             is String -> getString(name, default)
@@ -59,7 +59,8 @@ class SharedPref<T>() {
         res as T
     }
 
-    private fun putSharedPreferences(name: String, value: T) = with(prefs.edit()) {
+    @SuppressLint("CommitPrefEdits")
+    private fun  putSharedPreferences(name: String, value: T) = with(prefs.edit()) {
         when (value) {
             is Long -> putLong(name, value)
             is String -> putString(name, value)
@@ -69,7 +70,6 @@ class SharedPref<T>() {
             else -> putString(name, serialize(value))
         }.apply()
     }
-
 
 
     /**
@@ -93,8 +93,7 @@ class SharedPref<T>() {
     private fun <T> serialize(obj: T): String? {
         val byteArrayOutputStream = ByteArrayOutputStream()
         val objectOutputStream = ObjectOutputStream(
-            byteArrayOutputStream
-        )
+            byteArrayOutputStream)
         objectOutputStream.writeObject(obj)
         var serStr = byteArrayOutputStream.toString("ISO-8859-1")
         serStr = java.net.URLEncoder.encode(serStr, "UTF-8")
@@ -107,14 +106,12 @@ class SharedPref<T>() {
      * 反序列化对象
      */
     @Throws(Exception::class)
-    private inline fun <reified T> deSerialization(str: String?): T {
+    private fun <T> deSerialization(str: String?): T {
         val redStr = java.net.URLDecoder.decode(str, "UTF-8")
         val byteArrayInputStream = ByteArrayInputStream(
-            redStr.toByteArray(charset("ISO-8859-1"))
-        )
+            redStr.toByteArray(charset("ISO-8859-1")))
         val objectInputStream = ObjectInputStream(
-            byteArrayInputStream
-        )
+            byteArrayInputStream)
         val obj = objectInputStream.readObject() as T
         objectInputStream.close()
         byteArrayInputStream.close()

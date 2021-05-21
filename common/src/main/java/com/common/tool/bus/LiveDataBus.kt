@@ -1,4 +1,4 @@
-package com.common.tool.live_data_bus
+package com.common.tool.bus
 
 import androidx.lifecycle.*
 import java.util.concurrent.ConcurrentHashMap
