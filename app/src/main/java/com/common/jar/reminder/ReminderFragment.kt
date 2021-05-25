@@ -272,7 +272,6 @@ class ReminderFragment : BaseFragment<FragmentReminderBinding, EmptyViewModel>()
                 }
             }
         }
-
         adapter.notifyDataSetChanged()
     }
 

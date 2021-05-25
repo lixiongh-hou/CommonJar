@@ -14,6 +14,10 @@ import com.common.tool.base.EmptyViewModel
  */
 class LifeCycleServiceFragment : BaseFragment<FragmentLifeCycleServiceBinding, EmptyViewModel>() {
 
+    override fun onBackClickListener() {
+        requireActivity().finish()
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         binding.activity = this
     }

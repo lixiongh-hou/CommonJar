@@ -79,10 +79,11 @@ abstract class BaseFragmentDialog<Binding: ViewDataBinding> : AppCompatDialogFra
 
     override fun onStart() {
         super.onStart()
-        if (!created) {
-            initParams()
-            created = true
-        }
+//        if (!created) {
+//
+//            created = true
+//        }
+        initParams()
     }
 
     private fun initParams() {

@@ -16,27 +16,26 @@ import java.util.ArrayList
  */
 
 inline fun <reified A> Context.openActivity(vararg pairs: Pair<String, Any>) {
-    val bundle = Bundle()
-    pairs.forEach {
-        when(it.second){
-            is String -> bundle.putString(it.first, it.second as String)
-            is Int -> bundle.putInt(it.first, it.second as Int)
-            is Parcelable -> bundle.putParcelable(it.first, it.second as Parcelable)
-            is ArrayList<*> -> {
-                if (it.second is ArrayList<*>) {
-                    bundle.putParcelableArrayList(it.first, it.second as ArrayList<out Parcelable>)
-                }
+    val bundle = Bundle(pairs.size).apply {
+        for ((key, value) in pairs){
+            when(value){
+                is String -> putString(key, value)
+                is Int -> putInt(key, value)
+                is Parcelable -> putParcelable(key, value)
+                is ArrayList<*> -> putParcelableArrayList(key, value as ArrayList<out Parcelable>)
+                is Float -> putFloat(key, value)
+                is Double -> putDouble(key, value)
+                is Boolean -> putBoolean(key, value)
             }
-            is Float -> bundle.putFloat(it.first, it.second as Float)
-            is Double -> bundle.putDouble(it.first, it.second as Double)
-            is Boolean -> bundle.putBoolean(it.first, it.second as Boolean)
         }
     }
+
     val intent = Intent(this ,A::class.java)
     intent.putExtras(bundle)
     startActivity(intent)
 }
 
 inline fun <reified A> Context.openActivity() = startActivity(Intent(this ,A::class.java))
+
 
 

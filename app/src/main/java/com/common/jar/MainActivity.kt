@@ -30,6 +30,7 @@ import com.common.jar.work.WorkActivity
 import com.common.tool.base.BaseActivity
 import com.common.tool.base.BaseApp
 import com.common.tool.base.rv.BaseAdapter
+import com.common.tool.util.openActivity
 import com.common.tool.util.solveNestQuestion
 import com.google.gson.Gson
 
@@ -141,11 +142,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            1 -> startActivity(Intent(this, WorkActivity::class.java))
-            2 -> startActivity(Intent(this, PagingActivity::class.java))
-            3 -> startActivity(Intent(this, ReminderActivity::class.java))
-            4 -> startActivity(Intent(this, LifeCycleActivity::class.java))
-            5 -> startActivity(Intent(this, MusicActivity::class.java))
+            1 -> openActivity<WorkActivity>()
+            2 -> openActivity<PagingActivity>()
+            3 -> openActivity<ReminderActivity>()
+            4 -> openActivity<LifeCycleActivity>()
+            5 -> openActivity<MusicActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

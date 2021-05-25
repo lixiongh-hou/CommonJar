@@ -5,5 +5,6 @@
     <string name="notifyContent">已到%1$s检测时间段\n</string>
     <string name="detection_reminder">检测提醒</string>
     <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
 
 </resources>

@@ -59,6 +59,6 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     //https://github.com/LGD2009/LivePermissions
-    implementation 'com.ftd.livepermissions:livepermissions:1.0.2'
+//    implementation 'com.ftd.livepermissions:livepermissions:1.0.2'
 
 }

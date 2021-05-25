@@ -78,7 +78,7 @@ class AudioService : Service() {
                     } else {
                         binder.notifyUpdateUi()
                     }
-                    Log.e("测试", "专辑封面${(musicList?.get(position)?.path)?.getAlbumArt(this)}")
+//                    Log.e("测试", "专辑封面${(musicList?.get(position)?.path)?.getAlbumArt(this)}")
                 }
             }
         }
