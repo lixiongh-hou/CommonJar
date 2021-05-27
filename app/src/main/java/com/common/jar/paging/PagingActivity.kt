@@ -34,6 +34,7 @@ class PagingActivity : BaseActivity<ActivityPagingBinding, EmptyViewModel>() {
 
         // set navigation graph
         navController.setGraph(R.navigation.nav_paging)
+
     }
 
     override fun initData() {

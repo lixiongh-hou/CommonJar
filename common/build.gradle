@@ -54,14 +54,12 @@ dependencies {
     api 'androidx.navigation:navigation-ui:2.3.3'
 
     // rxjava+okHttp+retrofit+gson
-    api "io.reactivex.rxjava2:rxjava:2.2.19"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.5.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+//    api 'com.squareup.okhttp3:okhttp:4.5.0'
+    api 'com.squareup.retrofit2:retrofit:2.8.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+    api 'com.squareup.retrofit2:converter-gson:2.6.1'
     api 'com.google.code.gson:gson:2.8.6'
-    implementation('com.github.ihsanbal:LoggingInterceptor:3.1.0') {
+    api('com.github.ihsanbal:LoggingInterceptor:3.1.0') {
         exclude group: 'org.json', module: 'json'
     }
 
@@ -102,4 +100,10 @@ dependencies {
     api 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
     // 查看大图
     api 'com.github.SherlockGougou:BigImageViewPager:androidx-6.1.5'
+
+    //https://github.com/ximsfei/Android-skin-support#%E6%8F%92%E4%BB%B6%E5%BC%8F%E6%8D%A2%E8%82%A4
+    api 'skin.support:skin-support:4.0.5'                   // skin-support
+    api 'skin.support:skin-support-appcompat:4.0.5'         // skin-support 基础控件支持
+    api 'skin.support:skin-support-design:4.0.5'            // skin-support-design material design 控件支持[可选]
+    api 'skin.support:skin-support-constraint-layout:4.0.5' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }

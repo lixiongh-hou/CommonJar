@@ -1,5 +1,6 @@
-package com.common.jar.paging
+package com.common.jar.paging.local
 
+import android.util.Log
 import androidx.paging.PositionalDataSource
 
 /**
@@ -10,9 +11,11 @@ import androidx.paging.PositionalDataSource
 class ConcertDataSource : PositionalDataSource<Student>() {
     /**
      * 当有了初始化数据之后，滑动的时候如果需要加载数据的话，会调用此方法。
+     * params.startPosition从第几行还是加载，params.loadSize加载多少行
      */
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Student>) {
         callback.onResult(fetchItems(params.startPosition, params.loadSize))
+        Log.e("测试", "params.startPosition${params.startPosition}---params.loadSize${params.loadSize}")
     }
 
     /**

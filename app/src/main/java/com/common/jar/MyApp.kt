@@ -9,7 +9,12 @@ import net.mikaelzero.mojito.view.sketch.SketchImageLoadFactory
 import okhttp3.Cache
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
+import skin.support.SkinCompatManager
+import skin.support.app.SkinAppCompatViewInflater
+import skin.support.constraint.app.SkinConstraintViewInflater
+import skin.support.design.app.SkinMaterialViewInflater
 import java.io.File
+
 
 /**
  * @author 李雄厚
@@ -25,6 +30,11 @@ class MyApp : BaseApp(), ImageLoaderFactory {
             GlideImageLoader.with(this),
             SketchImageLoadFactory()
         )
+        SkinCompatManager.withoutActivity(this)
+            .addInflater(SkinAppCompatViewInflater()) // 基础控件换肤初始化
+            .addInflater(SkinMaterialViewInflater()) // material design 控件换肤初始化[可选]
+            .addInflater(SkinConstraintViewInflater()) // ConstraintLayout 控件换肤初始化[可选]
+            .loadSkin()
     }
 
     override fun newImageLoader(): ImageLoader {

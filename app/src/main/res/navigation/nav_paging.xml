@@ -5,10 +5,16 @@
     android:id="@+id/nav_paging"
     app:startDestination="@id/pagingFragment">
 
+<!--        <fixFragment-->
+<!--            android:id="@+id/pagingFragment"-->
+<!--            android:name="com.common.jar.paging.local.PagingLocalFragment"-->
+<!--            tools:layout="@layout/fragment_local_paging">-->
+
+<!--        </fixFragment>-->
     <fixFragment
         android:id="@+id/pagingFragment"
-        android:name="com.common.jar.paging.PagingFragment"
-        tools:layout="@layout/fragment_paging">
+        android:name="com.common.jar.paging.server.PagingServerFragment"
+        tools:layout="@layout/fragment_paging_server">
 
     </fixFragment>
 </navigation>

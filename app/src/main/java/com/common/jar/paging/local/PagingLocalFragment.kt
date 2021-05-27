@@ -1,19 +1,22 @@
-package com.common.jar.paging
+package com.common.jar.paging.local
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.common.jar.EditTitleLiveData
-import com.common.jar.databinding.FragmentPagingBinding
+import com.common.jar.databinding.FragmentLocalPagingBinding
 import com.common.tool.base.BaseFragment
 
 /**
  * @author 李雄厚
  * Paging 大致使用 https://developer.android.com/jetpack/androidx/releases/paging
  *
+ * 数据加载本地代码for循环生成的数据
+ *
  * @features RecyclerView分页加载数据
+ *
  */
-class PagingFragment : BaseFragment<FragmentPagingBinding, PagingViewModel>() {
+class PagingLocalFragment : BaseFragment<FragmentLocalPagingBinding, PagingViewModel>() {
     private var adapter = StudentAdapter()
 
     override fun onBackClickListener() {

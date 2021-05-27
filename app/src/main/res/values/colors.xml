@@ -3,4 +3,7 @@
 
     <color name="color_50_FF">#50FFFFFF</color>
     <color name="green">#ff1ec399</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
 </resources>

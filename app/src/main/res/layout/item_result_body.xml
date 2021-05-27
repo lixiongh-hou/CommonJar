@@ -9,10 +9,10 @@
             name="data"
             type="com.common.jar.VoResultBody" />
 
-       <!-- <variable
-            name="adapter"
-            type="com.common.tool.base.rv.BaseAdapter" />
--->
+        <!-- <variable
+             name="adapter"
+             type="com.common.tool.base.rv.BaseAdapter" />
+ -->
         <import type="com.common.tool.util.DateTimeUtil" />
 
     </data>
@@ -20,6 +20,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:padding="13dp">
 
         <LinearLayout
@@ -44,7 +45,7 @@
                 android:layout_marginStart="13dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -52,7 +53,7 @@
                     android:text="@{data.name}"
                     android:textColor="@color/black" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -62,7 +63,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,10 +81,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="13dp"
-            app:ngv_gridSpacing="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:ngv_gridSpacing="5dp" />
 
         <!--<androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -101,7 +102,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="13dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nineGridView">
@@ -118,7 +118,7 @@
                 app:text_color_normal="#E58566"
                 tools:ignore="RelativeOverlap" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/praise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,9 +126,10 @@
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 android:text="@string/_0"
+                android:textColor="@color/black"
                 app:drawableStartCompat="@drawable/ic_praise" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,9 +139,10 @@
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 android:text="@string/_0"
+                android:textColor="@color/black"
                 app:drawableStartCompat="@drawable/ic_message" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/browse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,6 +152,7 @@
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 android:text="@string/_0"
+                android:textColor="@color/black"
                 app:drawableStartCompat="@drawable/ic_browse" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

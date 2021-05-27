@@ -1,4 +1,4 @@
-package com.common.jar.paging
+package com.common.jar.paging.local
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

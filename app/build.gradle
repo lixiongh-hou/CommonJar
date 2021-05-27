@@ -19,6 +19,12 @@ android {
         multiDexEnabled true
     }
 
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res-night', 'src/main/res-blue']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -59,6 +65,4 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     //https://github.com/LGD2009/LivePermissions
-//    implementation 'com.ftd.livepermissions:livepermissions:1.0.2'
-
 }

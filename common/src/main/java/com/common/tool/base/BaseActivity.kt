@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.SkinAppCompatDelegateImpl
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.DataBindingUtil
@@ -307,4 +309,6 @@ abstract class BaseActivity<Binding : ViewDataBinding, VM : BaseViewModel> : App
             setEnableOverScrollDrag(true)
         }
     }
+
+    override fun getDelegate(): AppCompatDelegate = SkinAppCompatDelegateImpl.get(this, this)
 }

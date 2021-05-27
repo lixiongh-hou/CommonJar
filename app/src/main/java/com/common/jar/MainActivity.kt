@@ -1,7 +1,6 @@
 package com.common.jar
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
@@ -12,10 +11,11 @@ import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import coil.imageLoader
 import coil.load
 import coil.request.ImageRequest
@@ -28,11 +28,11 @@ import com.common.jar.reminder.ReminderActivity
 import com.common.jar.view.nine_grid.NineGridView
 import com.common.jar.work.WorkActivity
 import com.common.tool.base.BaseActivity
-import com.common.tool.base.BaseApp
 import com.common.tool.base.rv.BaseAdapter
 import com.common.tool.util.openActivity
 import com.common.tool.util.solveNestQuestion
 import com.google.gson.Gson
+import skin.support.SkinCompatManager
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -137,6 +137,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         menu?.add(0, 3, 0, "闹钟提醒")
         menu?.add(0, 4, 0, "LifeCycle")
         menu?.add(0, 5, 0, "音乐播放")
+        menu?.add(0, 6, 0, "白天模式")
+        menu?.add(0, 7, 0, "暗黑模式")
+        menu?.add(0, 8, 0, "蓝色")
         return true
     }
 
@@ -147,9 +150,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             3 -> openActivity<ReminderActivity>()
             4 -> openActivity<LifeCycleActivity>()
             5 -> openActivity<MusicActivity>()
+            6 -> SkinCompatManager.getInstance().loadSkin("",SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN)
+            7 -> SkinCompatManager.getInstance().loadSkin("night",SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN)
+            8 -> SkinCompatManager.getInstance().loadSkin("blue",SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN)
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 //    private fun workerLiveData(activity: AppCompatActivity) {
 //        NotifyManager.workManager.getWorkInfosByTagLiveData(NotifyManager.WORKER_TAG).observe(activity, Observer {

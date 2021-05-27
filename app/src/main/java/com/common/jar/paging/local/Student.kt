@@ -1,4 +1,4 @@
-package com.common.jar.paging
+package com.common.jar.paging.local
 
 /**
  * @author 李雄厚

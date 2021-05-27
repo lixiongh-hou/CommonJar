@@ -1,4 +1,4 @@
-package com.common.jar.paging
+package com.common.jar.paging.local
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,14 +21,13 @@ class PagingViewModel : BaseViewModel() {
     fun setData() {
         val concertFactory = ConcertFactory()
         concertDataSource = concertFactory.create()
-//        convertList = LivePagedListBuilder(concertFactory, PagedList.Config.Builder()
-//            .setPageSize(20)                         //配置分页加载的数量
-//            .setEnablePlaceholders(false)     //配置是否启动PlaceHolders
-//            .setInitialLoadSizeHint(20)              //初始化加载的数量
+        convertList = LivePagedListBuilder(concertFactory, PagedList.Config.Builder()
+            .setPageSize(20)                         //配置分页加载的数量
+            .setEnablePlaceholders(false)     //配置是否启动PlaceHolders
+            .setInitialLoadSizeHint(20)              //初始化加载的数量
+            .build()).build()
 
 
-        convertList = LivePagedListBuilder(concertFactory,  20/* 每页加载多少数据 */)
-            .build()
 
     }
 
